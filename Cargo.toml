@@ -1,0 +1,22 @@
+[package]
+name = "packer-3d"
+version = "0.2.3"
+authors = ["R. Besson"]
+edition = "2021"
+keywords = ["bin", "box", "packer"]
+description = "Packing algorithm for 3D container packing which optimizes for width, height, length, or all three."
+license = "CC-BY-NC-SA-4.0"
+repository = "https://github.com/r-besson/n-dimensional-bin-packing"
+
+[profile.dev]
+debug = true
+strip = false
+
+[profile.release]
+opt-level = 3
+panic = "abort"
+lto = "fat"
+codegen-units = 1
+
+[dependencies]
+fnv = "1.0.7"
