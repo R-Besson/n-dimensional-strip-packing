@@ -1,16 +1,14 @@
-# packer-3d v0.2.3
+# packer-3d
 > Rust Crate for 3-dimensional packing of boxes optimally along x, y or z, or all three axis.
+> Includes an N-dimensional Constructive Solid Geometry cut generator script.
 
 <img src="./images/example.jpg" alt="Example of what you can expect" width="400"/><br>
 *Example of what you can make*
 
 ## Quickstart
+Run this in your rust project to add packer-3d to your dependencies.
 ```
-$ cargo add packer-3d@0.2.3
-```
-OR place this under `[dependencies]` in `Cargo.toml`
-```
-packer-3d = "0.2.3"
+cargo add packer-3d
 ```
 
 ## [Documentation](https://docs.rs/packer-3d/latest/packer_3d/)
@@ -18,37 +16,31 @@ packer-3d = "0.2.3"
 ## Example
 After adding the dependency, you can test it with this example:
 ```rust
-use packer_3d::{
-	PackerInstance,
-	sorting::Sorting,
-	box3d::Box3D,
-	vector3d::Vector3D
-};
+use packer_3d::{box3d::Box3D, sorting::Sorting, vector3d::Vector3D, PackerInstance};
 
 fn main() {
-	let mut my_boxes = vec![
-		Box3D::from_xyz_whl(0,0,0,100,200,300,1,0),
-		Box3D::from_xyz_whl(0,0,0,100,200,300,2,0),
-		Box3D::from_xyz_whl(0,0,0,100,200,300,3,0)
-	];
-	
-	// Create our packer instance
-	let mut my_instance = PackerInstance::new(
-		&mut my_boxes, // Our boxes
-		Vector3D::new(500, 0, 500), // Our container size
-		true, // Allow rotations
-		(false, true, false), // Minimize height only
-		&Sorting::descending_volume // Our initial sorting heuristic
-	);
-	
-	// Pack all 3 boxes
-	for _ in 0..3 {
-		match my_instance.pack_next() {
-			Err(error) => println!("Error: {}", error),
-		}
-	}
+    let mut my_boxes = vec![
+        Box3D::from_xyz_whl(0, 0, 0, 100, 200, 300, 1, 0),
+        Box3D::from_xyz_whl(0, 0, 0, 100, 200, 300, 2, 0),
+        Box3D::from_xyz_whl(0, 0, 0, 100, 200, 300, 3, 0),
+    ];
 
-	println!("{:#?}", my_instance.boxes());
+    let mut my_instance = PackerInstance::new(
+        &mut my_boxes,               // Our boxes
+        Vector3D::new(500, 0, 500),  // Our container size
+        true,                        // No rotations
+        (false, true, false),        // Minimize height only
+        &Sorting::descending_volume, // Our initial sorting heuristic
+    );
+
+    for _ in 0..3 {
+        match my_instance.pack_next() {
+            Err(error) => println!("Error: {}", error),
+            Ok(()) => {}
+        }
+    }
+
+    println!("{:#?}", my_instance.boxes());
 }
 ```
 Which should output:
@@ -98,5 +90,3 @@ Which should output:
 	},
 ]
 ```
-Visualized this gives:<br>
-<img src="./images/result.jpg" alt="Result Visualized" width="400"/><br>
