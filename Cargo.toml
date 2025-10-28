@@ -6,7 +6,7 @@ edition = "2021"
 keywords = ["bin", "box", "packer"]
 description = "Packing algorithm for 3D container packing which optimizes for width, height, length, or all three."
 license = "CC-BY-NC-SA-4.0"
-repository = "https://github.com/r-besson/n-dimensional-bin-packing"
+repository = "https://github.com/R-Besson/n-dimensional-strip-packing"
 
 [profile.dev]
 debug = true
