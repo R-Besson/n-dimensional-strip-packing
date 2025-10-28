@@ -3,7 +3,7 @@
 > Includes an N-dimensional Constructive Solid Geometry cut generator script.
 
 Example of what you can make. Rendered using <u>Bevy data-drive game engine</u>.
-<img src="./images/example.png" alt="Example of what you can expect" width="400"/><br>
+<img src="./img/example.png" alt="Example of what you can expect" width="400"/><br>
 
 ## Quickstart
 Run this in your rust project to add packer-3d to your dependencies.
