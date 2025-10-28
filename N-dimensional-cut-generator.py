@@ -1,5 +1,7 @@
 import sys, itertools
 
+# generates rust syntax for the cut function in packer-3d, however you can specify and modify the strings to change dimension or language. 
+
 # constructive solid geometry cut developed for N dimensions
 def generate_csg_code(n):
 	origin = [1]
