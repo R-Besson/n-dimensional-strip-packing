@@ -1,6 +1,4 @@
 # packer-3d
-> Rust Crate for 3-dimensional packing of boxes optimally along x, y or z, or all three axis.
-> Includes an N-dimensional Constructive Solid Geometry cut generator script.
 
 Example of what you can make. Rendered using the [Bevy](https://crates.io/crates/bevy) data-driven game engine.<br>
 <img src="img/example.png" alt="Example of what you can expect" width="400"/><br>
