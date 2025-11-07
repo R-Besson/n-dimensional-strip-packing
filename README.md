@@ -17,28 +17,33 @@ After adding the dependency, you can test it with this example:
 use packer_3d::{box3d::Box3D, sorting::Sorting, vector3d::Vector3D, PackerInstance};
 
 fn main() {
-    let mut my_boxes = vec![
-        Box3D::from_xyz_whl(0, 0, 0, 100, 200, 300, 1, 0),
-        Box3D::from_xyz_whl(0, 0, 0, 100, 200, 300, 2, 0),
-        Box3D::from_xyz_whl(0, 0, 0, 100, 200, 300, 3, 0),
-    ];
+	let my_boxes = vec![
+		Box3D::from_xyz_whl(0, 0, 0, 100, 200, 300, 1, 0),
+		Box3D::from_xyz_whl(0, 0, 0, 100, 200, 300, 2, 0),
+		Box3D::from_xyz_whl(0, 0, 0, 100, 200, 300, 3, 0),
+	];
 
-    let mut my_instance = PackerInstance::new(
-        &mut my_boxes,               // Our boxes
-        Vector3D::new(500, 0, 500),  // Our container size
-        true,                        // No rotations
-        (false, true, false),        // Minimize height only
-        &Sorting::descending_volume, // Our initial sorting heuristic
-    );
+	let mut my_instance = PackerInstance::new(
+		my_boxes.clone(),            // Our boxes
+		Vector3D::new(500, 0, 500),  // Our container size
+		true,                        // No rotations
+		(false, true, false),        // Minimize height only
+		Sorting::descending_volume,  // Our initial sorting heuristic
+	);
 
-    for _ in 0..3 {
-        match my_instance.pack_next() {
-            Err(error) => println!("Error: {}", error),
-            Ok(()) => {}
-        }
-    }
+	// for _ in 0..3 {
+	//     match my_instance.pack_next() {
+	//         Err(error) => println!("Error: {}", error),
+	//         Ok(()) => {}
+	//     }
+	// }
 
-    println!("{:#?}", my_instance.boxes());
+	match my_instance.pack_all() {
+		Err(errors) => println!("Errors: {:#?}", errors),
+		Ok(()) => {}
+	}
+
+	println!("{:#?}", my_instance.boxes());
 }
 ```
 Which should output:
