@@ -10,7 +10,7 @@ let my_boxes = vec![
 let mut my_instance = PackerInstance::new(
     my_boxes.clone(),            // Our boxes
     Vector3D::new(500, 0, 500),  // Our container size
-    true,                        // No rotations
+    true,                        // Allow rotations
     (false, true, false),        // Minimize height only
     Sorting::descending_volume,  // Our initial sorting heuristic
 );
